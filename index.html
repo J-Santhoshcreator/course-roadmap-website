@@ -3,72 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Road Map - Login</title>
+    <title>Course Road Map</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Login Page Container -->
-    <div class="login-container">
-        <div class="login-box">
-            <!-- Website Logo/Title -->
-            <div class="login-header">
-                <h1 class="site-title">📚 Course Road Map</h1>
-                <p class="site-subtitle">Your Learning Journey Starts Here</p>
+    <!-- ============================================
+         LOGIN PAGE (index.html)
+         ============================================ -->
+    <div id="loginPage" class="page">
+        <div class="login-container">
+            <div class="login-box">
+                <!-- Website Logo/Title -->
+                <div class="login-header">
+                    <h1 class="site-title">📚 Course Road Map</h1>
+                    <p class="site-subtitle">Your Learning Journey Starts Here</p>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="login-form">
+                    <!-- Student Name Input -->
+                    <div class="form-group">
+                        <label for="studentName">Student Name:</label>
+                        <input 
+                            type="text" 
+                            id="studentName" 
+                            placeholder="Enter your full name" 
+                            required
+                        >
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+
+                    <!-- Year Selection -->
+                    <div class="form-group">
+                        <label for="year">Year:</label>
+                        <select id="year" required>
+                            <option value="">-- Select Year --</option>
+                            <option value="First Year">First Year</option>
+                            <option value="Second Year">Second Year</option>
+                            <option value="Third Year">Third Year</option>
+                            <option value="Fourth Year">Fourth Year</option>
+                        </select>
+                        <span class="error-message" id="yearError"></span>
+                    </div>
+
+                    <!-- Department Selection -->
+                    <div class="form-group">
+                        <label for="department">Department:</label>
+                        <select id="department" required>
+                            <option value="">-- Select Department --</option>
+                            <option value="CSE">CSE (Computer Science & Engineering)</option>
+                            <option value="IT">IT (Information Technology)</option>
+                            <option value="ECE">ECE (Electronics & Communication)</option>
+                            <option value="EEE">EEE (Electrical & Electronics)</option>
+                            <option value="AI & DS">AI & DS (Artificial Intelligence & Data Science)</option>
+                        </select>
+                        <span class="error-message" id="departmentError"></span>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="btn-login">Login</button>
+                </form>
+
+                <!-- Info Message -->
+                <p class="login-info">
+                    👋 New here? Start your learning journey by entering your details above!
+                </p>
             </div>
-
-            <!-- Login Form -->
-            <form id="loginForm" class="login-form">
-                <!-- Student Name Input -->
-                <div class="form-group">
-                    <label for="studentName">Student Name:</label>
-                    <input 
-                        type="text" 
-                        id="studentName" 
-                        placeholder="Enter your full name" 
-                        required
-                    >
-                    <span class="error-message" id="nameError"></span>
-                </div>
-
-                <!-- Year Selection -->
-                <div class="form-group">
-                    <label for="year">Year:</label>
-                    <select id="year" required>
-                        <option value="">-- Select Year --</option>
-                        <option value="First Year">First Year</option>
-                        <option value="Second Year">Second Year</option>
-                        <option value="Third Year">Third Year</option>
-                        <option value="Fourth Year">Fourth Year</option>
-                    </select>
-                    <span class="error-message" id="yearError"></span>
-                </div>
-
-                <!-- Department Selection -->
-                <div class="form-group">
-                    <label for="department">Department:</label>
-                    <select id="department" required>
-                        <option value="">-- Select Department --</option>
-                        <option value="CSE">CSE (Computer Science & Engineering)</option>
-                        <option value="IT">IT (Information Technology)</option>
-                        <option value="ECE">ECE (Electronics & Communication)</option>
-                        <option value="EEE">EEE (Electrical & Electronics)</option>
-                        <option value="AI & DS">AI & DS (Artificial Intelligence & Data Science)</option>
-                    </select>
-                    <span class="error-message" id="departmentError"></span>
-                </div>
-
-                <!-- Login Button -->
-                <button type="submit" class="btn-login">Login</button>
-            </form>
-
-            <!-- Info Message -->
-            <p class="login-info">
-                👋 New here? Start your learning journey by entering your details above!
-            </p>
         </div>
     </div>
 
+    <!-- ============================================
+         HOME PAGE
+         ============================================ -->
+    <div id="homePage" class="page" style="display: none;">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">📚 Course Road Map</div>
+                <ul class="nav-menu">
+                    <li><a href="#" onclick="showPage('homePage')" class="nav-link">Home</a></li>
+                    <li><a href="#" onclick="showPage('myCoursesPage')" class="nav-link">My Courses</a></li>
+                    <li><a href="#" onclick="showPage('roadmapPage')" class="nav-link">Road Map</a></li>
+                    <li><a href="#" onclick="showPage('aboutPage')" class="nav-link">About</a></li>
+                    <li><a href="#" onclick="logout()" class="nav-link logout-link">Logout</a></li>
+                </ul>
+                <!-- Mobile Menu Button -->
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Welcome Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Welcome, <span id="welcomeName">Student</span>! 👋</h1>
+                <p>Start your learning journey with our comprehensive course roadmap</p>
+                <button class="btn-primary" onclick="showPage('myCoursesPage')">Explore Courses</button>
+            </div>
+            <div class="hero-background"></div>
+        </section>
+
+        <!-- Popular Courses Section -->
+        <section class="popular-courses">
+            <div class="container">
+                <h2>Popular Courses</h2>
+                <div class="courses-grid" id="popularCoursesGrid">
+                    <!-- Courses will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>7+</h3>
+                        <p>Available Courses</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Beginner</h3>
+                        <p>to Advanced</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>100%</h3>
+                        <p>Free Learning</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         MY COURSES PAGE
+         ============================================ -->
+    <div id="myCoursesPage" class="page" style="display: none;">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">📚 Course Road Map</div>
+                <ul class="nav-menu">
+                    <li><a href="#" onclick="showPage('homePage')" class="nav-link">Home</a></li>
+                    <li><a href="#" onclick="showPage('myCoursesPage')" class="nav-link">My Courses</a></li>
+                    <li><a href="#" onclick="showPage('roadmapPage')" class="nav-link">Road Map</a></li>
+                    <li><a href="#" onclick="showPage('aboutPage')" class="nav-link">About</a></li>
+                    <li><a href="#" onclick="logout()" class="nav-link logout-link">Logout</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger2">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Courses Page Content -->
+        <section class="courses-section">
+            <div class="container">
+                <h1>My Courses</h1>
+                
+                <!-- Search and Filter Section -->
+                <div class="search-filter-section">
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Search courses..." 
+                            class="search-input"
+                        >
+                        <span class="search-icon">🔍</span>
+                    </div>
+
+                    <!-- Filter Options -->
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <label>Level:</label>
+                            <select id="levelFilter" class="filter-select">
+                                <option value="">All Levels</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Category:</label>
+                            <select id="categoryFilter" class="filter-select">
+                                <option value="">All Categories</option>
+                                <option value="Frontend">Frontend</option>
+                                <option value="Backend">Backend</option>
+                                <option value="Programming">Programming</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Duration:</label>
+                            <select id="durationFilter" class="filter-select">
+                                <option value="">All Duration</option>
+                                <option value="2-4 weeks">2-4 weeks</option>
+                                <option value="4-8 weeks">4-8 weeks</option>
+                                <option value="8+ weeks">8+ weeks</option>
+                            </select>
+                        </div>
+
+                        <button class="btn-clear-filter" onclick="clearFilters()">Clear Filters</button>
+                    </div>
+                </div>
+
+                <!-- Courses Grid -->
+                <div class="courses-grid" id="coursesGrid">
+                    <!-- Courses will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         COURSE ROADMAP PAGE
+         ============================================ -->
+    <div id="roadmapPage" class="page" style="display: none;">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">📚 Course Road Map</div>
+                <ul class="nav-menu">
+                    <li><a href="#" onclick="showPage('homePage')" class="nav-link">Home</a></li>
+                    <li><a href="#" onclick="showPage('myCoursesPage')" class="nav-link">My Courses</a></li>
+                    <li><a href="#" onclick="showPage('roadmapPage')" class="nav-link">Road Map</a></li>
+                    <li><a href="#" onclick="showPage('aboutPage')" class="nav-link">About</a></li>
+                    <li><a href="#" onclick="logout()" class="nav-link logout-link">Logout</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger3">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Roadmap Content -->
+        <section class="roadmap-section">
+            <div class="container">
+                <h1>Your Learning Roadmap</h1>
+                <p class="roadmap-subtitle">Follow this path to master web development</p>
+
+                <!-- Frontend Roadmap -->
+                <div class="roadmap-container">
+                    <h2>Frontend Development Roadmap</h2>
+                    <div class="roadmap-timeline" id="frontendRoadmap">
+                        <!-- Roadmap steps will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Backend Roadmap -->
+                <div class="roadmap-container">
+                    <h2>Backend Development Roadmap</h2>
+                    <div class="roadmap-timeline" id="backendRoadmap">
+                        <!-- Roadmap steps will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Course Details Modal -->
+                <div id="roadmapModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal" onclick="closeRoadmapModal()">&times;</span>
+                        <div id="modalBody">
+                            <!-- Course details will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         ABOUT PAGE
+         ============================================ -->
+    <div id="aboutPage" class="page" style="display: none;">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">📚 Course Road Map</div>
+                <ul class="nav-menu">
+                    <li><a href="#" onclick="showPage('homePage')" class="nav-link">Home</a></li>
+                    <li><a href="#" onclick="showPage('myCoursesPage')" class="nav-link">My Courses</a></li>
+                    <li><a href="#" onclick="showPage('roadmapPage')" class="nav-link">Road Map</a></li>
+                    <li><a href="#" onclick="showPage('aboutPage')" class="nav-link">About</a></li>
+                    <li><a href="#" onclick="logout()" class="nav-link logout-link">Logout</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger4">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- About Content -->
+        <section class="about-section">
+            <div class="container">
+                <h1>About Course Road Map</h1>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>What is Course Road Map?</h2>
+                        <p>
+                            Course Road Map is a comprehensive learning platform designed to help students 
+                            from various engineering departments master web development and programming skills.
+                        </p>
+                        <p>
+                            Our platform provides a structured learning path, starting from the basics (HTML, CSS, JavaScript) 
+                            and progressing to advanced topics like React, Flask, and Git version control.
+                        </p>
+                    </div>
+
+                    <div class="about-features">
+                        <h2>Why Choose Us?</h2>
+                        <ul class="features-list">
+                            <li>✅ <strong>Structured Learning Path:</strong> Follow a proven roadmap from beginner to advanced</li>
+                            <li>✅ <strong>Progress Tracking:</strong> Keep track of your learning progress with our built-in system</li>
+                            <li>✅ <strong>Multiple Departments:</strong> Courses tailored for CSE, IT, ECE, EEE, and AI & DS students</li>
+                            <li>✅ <strong>Free Access:</strong> All courses are 100% free to access</li>
+                            <li>✅ <strong>Interactive Roadmap:</strong> Visual learning paths make it easy to understand course prerequisites</li>
+                            <li>✅ <strong>Search & Filter:</strong> Find exactly what you're looking for with powerful search and filter features</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-team">
+                        <h2>Our Mission</h2>
+                        <p>
+                            To empower engineering students with practical web development and programming skills 
+                            through a structured, interactive, and accessible learning platform. We believe in learning by doing 
+                            and providing a clear roadmap for success.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <!-- Link to JavaScript -->
-    <script src="login.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
